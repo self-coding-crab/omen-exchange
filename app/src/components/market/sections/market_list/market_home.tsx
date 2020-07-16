@@ -312,7 +312,6 @@ export const MarketHome: React.FC<Props> = (props: Props) => {
   const filterItems: Array<DropdownItemProps> = filters.map((item, index) => {
     return {
       content: <CustomDropdownItem>{item.title}</CustomDropdownItem>,
-      secondaryText: index === 0 && counts.open > 0 && counts.open.toString(),
       onClick: item.onClick,
     }
   })
@@ -332,7 +331,6 @@ export const MarketHome: React.FC<Props> = (props: Props) => {
 
               onClick: () => {
                 setCategory(item.id)
-                setCounts({ open: item.numOpenConditions })
               },
             }
           }),

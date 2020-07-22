@@ -152,6 +152,7 @@ export interface MarketFilters {
   arbitrator: Maybe<string>
   templateId: Maybe<string>
   currency: Maybe<string>
+  marketValidity: Maybe<string>
 }
 
 export interface MarketMakerData {

@@ -60,6 +60,7 @@ export const DEFAULT_OPTIONS = {
   currency: null as Maybe<string>,
   sortBy: null as Maybe<MarketsSortCriteria>,
   sortByDirection: 'desc' as 'asc' | 'desc',
+  marketValidity: null as Maybe<string>
 }
 
 export const queryMyMarkets = gql`

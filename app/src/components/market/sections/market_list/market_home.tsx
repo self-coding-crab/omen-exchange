@@ -216,6 +216,7 @@ export const MarketHome: React.FC<Props> = (props: Props) => {
   )
   const [arbitrator, setArbitrator] = useState<Maybe<string>>(currentFilter.arbitrator)
   const [currency, setCurrency] = useState<Maybe<string>>(currentFilter.currency)
+  const [marketValidity, setMarketValidity] = useState<Maybe<string>>(currentFilter.marketValidity)
   const [templateId, setTemplateId] = useState<Maybe<string>>(null)
 
   const filters = [
@@ -263,8 +264,8 @@ export const MarketHome: React.FC<Props> = (props: Props) => {
   }, [context.account, state])
 
   useEffect(() => {
-    onFilterChange({ arbitrator, templateId, currency, category, sortBy, sortByDirection, state, title })
-  }, [arbitrator, templateId, currency, category, sortBy, sortByDirection, state, title, onFilterChange])
+    onFilterChange({ arbitrator, templateId, currency, marketValidity, category, sortBy, sortByDirection, state, title })
+  }, [arbitrator, templateId, currency, marketValidity, category, sortBy, sortByDirection, state, title, onFilterChange])
 
   const toggleSearch = useCallback(() => {
     setShowAdvancedFilters(false)
@@ -424,8 +425,10 @@ export const MarketHome: React.FC<Props> = (props: Props) => {
           <AdvancedFilters
             arbitrator={arbitrator}
             currency={currency}
+            marketValidity={marketValidity}
             onChangeArbitrator={setArbitrator}
             onChangeCurrency={setCurrency}
+            onChangeMarketValidity={setMarketValidity}
             onChangeTemplateId={setTemplateId}
           />
         )}

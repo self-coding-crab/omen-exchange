@@ -42,8 +42,10 @@ const Options = styled(Dropdown)`
 interface Props {
   currency: Maybe<string>
   arbitrator: Maybe<string>
+  marketValidity: Maybe<string>
   onChangeCurrency: (currency: Maybe<string>) => void
   onChangeArbitrator: (arbitrator: Maybe<string>) => void
+  onChangeMarketValidity: (marketValidity: Maybe<string>) => void
   onChangeTemplateId: (templateId: Maybe<string>) => void
 }
 
@@ -54,7 +56,7 @@ export const AdvancedFilters = (props: Props) => {
   const arbitrators = getArbitratorsByNetwork(networkId)
   const tokens = useTokens(context)
 
-  const { arbitrator, currency, onChangeArbitrator, onChangeCurrency, onChangeTemplateId } = props
+  const { arbitrator, currency, marketValidity, onChangeArbitrator, onChangeCurrency, onChangeMarketValidity, onChangeTemplateId } = props
 
   const allTokensOptions = [{ address: null, symbol: 'All', image: null }, ...tokens]
   const currencyOptions: Array<DropdownItemProps> = allTokensOptions.map(({ address, image, symbol }) => {
@@ -95,6 +97,17 @@ export const AdvancedFilters = (props: Props) => {
 
   const showQuestionType = false
 
+  const marketValidityOptions: Array<DropdownItemProps> = [
+    {
+      content: 'Valid',
+      onClick: () => onChangeMarketValidity('valid')
+    },
+    {
+      content: 'Invalid',
+      onClick: () => onChangeMarketValidity('invalid')
+    }
+  ]
+
   return (
     <Wrapper>
       <Column>
@@ -119,6 +132,15 @@ export const AdvancedFilters = (props: Props) => {
           dirty={true}
           dropdownPosition={DropdownPosition.right}
           items={arbitratorOptions}
+        />
+      </Column>
+      <Column>
+        <Title>Market Validity</Title>
+        <Options
+          currentItem={marketValidityOptions.findIndex(t => t.content === marketValidity)}
+          dirty={true}
+          dropdownPosition={DropdownPosition.right}
+          items={marketValidityOptions}
         />
       </Column>
     </Wrapper>

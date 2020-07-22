@@ -95,6 +95,10 @@ const MarketHomeContainer: React.FC = () => {
   let searchRoute = location.search.split('tag=')[1]
   if (searchRoute) searchRoute = searchRoute.split('&')[0]
 
+  const marketValidityFilter = location.search.includes('validity') ? true : false
+  let marketValidityRoute = location.search.split('validity=')[1]
+  if (marketValidityRoute) marketValidityRoute = marketValidityRoute.split('&')[0]
+
   let sortParam: Maybe<MarketsSortCriteria> = 'lastActiveDayAndScaledRunningDailyVolume'
   if (sortRoute === '24h-volume') {
     sortParam = 'lastActiveDayAndScaledRunningDailyVolume'
@@ -147,6 +151,13 @@ const MarketHomeContainer: React.FC = () => {
     searchParam = ''
   }
 
+  let marketValidityParam: string
+  if (marketValidityFilter) {
+    marketValidityParam = marketValidityRoute
+  } else {
+    marketValidityParam = ''
+  }
+
   const [filter, setFilter] = useState<MarketFilters>({
     state: stateParam,
     category: categoryParam,
@@ -156,6 +167,7 @@ const MarketHomeContainer: React.FC = () => {
     arbitrator: arbitratorParam,
     templateId: null,
     currency: currencyParam,
+    marketValidity: marketValidityParam
   })
 
   const [fetchedMarkets, setFetchedMarkets] = useState<Maybe<GraphResponseMarketsGeneric>>(null)
@@ -308,6 +320,10 @@ const MarketHomeContainer: React.FC = () => {
 
       if (filter.title) {
         routeQueryArray.push(`tag=${filter.title}`)
+      }
+
+      if(filter.marketValidity) {
+        routeQueryArray.push(`validity=${filter.marketValidity}`)
       }
 
       const routeQueryString = routeQueryArray.join('&')

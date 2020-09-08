@@ -1,5 +1,6 @@
 import WalletConnectApi from '@walletconnect/web3-subprovider'
 import { Connectors } from 'web3-react'
+import { AuthereumConnector } from '@web3-react/authereum-connector'
 
 import { infuraNetworkURL, supportedNetworkIds, supportedNetworkURLs } from '../util/networks'
 
@@ -15,6 +16,8 @@ const WalletConnect = new WalletConnectConnector({
   supportedNetworkURLs,
   defaultNetwork: 1,
 })
+
+const Authereum = new AuthereumConnector({ chainId: 1 })
 
 const Infura = new NetworkOnlyConnector({
   providerURL: infuraNetworkURL,

@@ -85,7 +85,7 @@ const UserDataRow = styled.div`
   display: flex;
   justify-content: space-between;
   &:first-child {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 `
 
@@ -349,6 +349,7 @@ const MarketPoolLiquidityWrapper: React.FC<Props> = (props: Props) => {
               formatBigNumber(userEarnings, collateral.decimals),
             )} ${collateral.symbol}`}
           />
+          §
           <UserDataTitleValue
             state={totalEarnings.gt(0) ? ValueStates.success : undefined}
             title={'Total Earnings'}
